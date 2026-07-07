@@ -1,0 +1,64 @@
+/*
+==========================================
+Quiz App Styles
+
+Creates a clean and modern
+quiz interface.
+
+==========================================
+*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:#e0f2fe;
+}
+
+.container{
+    width:500px;
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,.2);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+#question{
+    margin-bottom:20px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+#score{
+    text-align:center;
+    font-size:20px;
+    margin-top:20px;
+    font-weight:bold;
+}
