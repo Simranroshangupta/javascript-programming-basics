@@ -4,11 +4,14 @@ Project : Quiz App
 
 Description
 
-A simple multiple-choice quiz.
+A multiple-choice quiz
+application with score
+tracking.
 
 Features
 
 • Multiple Questions
+• Correct/Wrong Answer Highlight
 • Score Tracking
 • Restart Quiz
 
@@ -37,8 +40,8 @@ const quiz = [
     },
 
     {
-        question: "Which company developed JavaScript?",
-        options: ["Microsoft", "Netscape", "Google", "Oracle"],
+        question: "Which company created JavaScript?",
+        options: ["Microsoft", "Google", "Netscape", "Oracle"],
         answer: "Netscape"
     }
 
@@ -54,6 +57,8 @@ const scoreText = document.getElementById("score");
 
 function loadQuestion() {
 
+    next.style.display = "none";
+
     options.innerHTML = "";
 
     question.textContent = quiz[currentQuestion].question;
@@ -64,31 +69,49 @@ function loadQuestion() {
 
         button.textContent = option;
 
-        button.onclick = function(){
+        button.addEventListener("click", function(){
 
-            if(option === quiz[currentQuestion].answer){
+            checkAnswer(button, option);
 
-                score++;
-            }
-
-            next.disabled = false;
-
-            document.querySelectorAll("#options button")
-            .forEach(function(btn){
-
-                btn.disabled = true;
-            });
-
-        };
+        });
 
         options.appendChild(button);
 
     });
 
-    next.disabled = true;
 }
 
-next.addEventListener("click",function(){
+function checkAnswer(selectedButton, selectedAnswer){
+
+    const buttons = document.querySelectorAll("#options button");
+
+    buttons.forEach(function(button){
+
+        button.disabled = true;
+
+        if(button.textContent === quiz[currentQuestion].answer){
+
+            button.style.backgroundColor = "green";
+
+        }
+
+    });
+
+    if(selectedAnswer === quiz[currentQuestion].answer){
+
+        score++;
+
+    }else{
+
+        selectedButton.style.backgroundColor = "red";
+
+    }
+
+    next.style.display = "block";
+
+}
+
+next.addEventListener("click", function(){
 
     currentQuestion++;
 
@@ -98,19 +121,23 @@ next.addEventListener("click",function(){
 
     }else{
 
-        question.textContent = "Quiz Completed";
+        question.textContent = "Quiz Completed 🎉";
 
         options.innerHTML = "";
 
         scoreText.textContent =
-            `Your Score : ${score} / ${quiz.length}`;
+        `Your Score : ${score} / ${quiz.length}`;
 
         next.textContent = "Restart";
+
+        next.style.display = "block";
 
         next.onclick = function(){
 
             location.reload();
+
         };
+
     }
 
 });

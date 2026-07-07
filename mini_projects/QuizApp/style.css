@@ -62,3 +62,11 @@ button:hover{
     margin-top:20px;
     font-weight:bold;
 }
+#next{
+    display:none;
+}
+
+button:disabled{
+    cursor:not-allowed;
+    opacity:0.9;
+}
